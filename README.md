@@ -1,6 +1,6 @@
 # Magic Herb
 
-A Fabric mod for Minecraft 26.1 that lets you cultivate and share a smoke with your friends.
+A Fabric mod for Minecraft 26.3 that lets you cultivate and share a smoke with your friends.
 
 ---
 
@@ -56,9 +56,9 @@ Wild herb plants spawn across overworld biomes on the surface. They're rare enou
 ## Installation
 
 **Requirements:**
-- Minecraft 26.1
-- Fabric Loader 0.18.5+
-- Fabric API 0.145.1+26.1
+- Minecraft 26.3
+- Fabric Loader 0.20.1+
+- Fabric API 0.166.0+26.3
 
 Drop `magicherb-1.0.0.jar` into your `mods/` folder.
 
