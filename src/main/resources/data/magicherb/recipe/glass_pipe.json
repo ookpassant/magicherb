@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G",
+    "PG",
+    "P "
+  ],
+  "key": {
+    "G": "minecraft:glass",
+    "P": "minecraft:glass_pane"
+  },
+  "result": { "id": "magicherb:glass_pipe", "count": 1 }
+}

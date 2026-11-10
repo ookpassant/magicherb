@@ -1,9 +1,13 @@
 package net.magicherb;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.magicherb.item.ModComponents;
 import net.magicherb.network.ModPackets;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.chat.Component;
 import net.minecraft.core.particles.ParticleTypes;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,6 +15,13 @@ public class MagicHerbModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ItemTooltipCallback.EVENT.register((stack, context, flag, lines) -> {
+            if (stack.has(ModComponents.INDOOR_GROWN)) {
+                lines.add(Math.min(1, lines.size()),
+                    Component.translatable("tooltip.magicherb.indoor_grown").withStyle(ChatFormatting.GREEN));
+            }
+        });
+
         ClientPlayNetworking.registerGlobalReceiver(ModPackets.SmokePayload.ID, (payload, context) ->
             context.client().execute(() -> {
                 ClientLevel level = context.client().level;

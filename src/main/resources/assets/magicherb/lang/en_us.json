@@ -3,7 +3,12 @@
   "item.magicherb.dried_herb":  "Dried Herb",
   "item.magicherb.herb_seeds":  "Herb Seeds",
   "item.magicherb.pipe":        "Wizard's Pipe",
+  "item.magicherb.clay_pipe":   "Clay Pipe",
+  "item.magicherb.glass_pipe":  "Glass Pipe",
   "item.magicherb.joint":       "Herbal Blend",
+
+  "tooltip.magicherb.indoor_grown": "Indoor-grown (extra potent)",
+  "tag.item.magicherb.smokes":      "Smokeable Herbs",
 
   "block.magicherb.wild_herb_plant": "Wild Herb",
   "block.magicherb.herb_crop":       "Herb Crop",
@@ -23,5 +28,11 @@
   "advancement.magicherb.green_thumb.desc":        "Harvest a fully grown herb crop",
 
   "advancement.magicherb.bad_trip.title":          "Bad Trip",
-  "advancement.magicherb.bad_trip.desc":           "Sometimes the herb has other plans..."
+  "advancement.magicherb.bad_trip.desc":           "Sometimes the herb has other plans...",
+
+  "advancement.magicherb.cured.title":             "Cured",
+  "advancement.magicherb.cured.desc":              "Smoke some dried herb in a pipe",
+
+  "advancement.magicherb.grow_room.title":         "Grow Room",
+  "advancement.magicherb.grow_room.desc":          "Harvest a herb crop grown indoors under artificial light"
 }

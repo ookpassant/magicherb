@@ -4,7 +4,9 @@ import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.magicherb.MagicHerbMod;
 import net.magicherb.block.ModBlocks;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -24,7 +26,17 @@ public class ModItems {
         new BlockItem(ModBlocks.HERB_CROP, props("herb_seeds").stacksTo(64)));
 
     public static final Item PIPE = register("pipe",
-        new PipeItem(props("pipe").stacksTo(1).durability(64)));
+        new PipeItem(PipeItem.Material.WOOD, props("pipe").durability(PipeItem.Material.WOOD.durability)));
+
+    public static final Item CLAY_PIPE = register("clay_pipe",
+        new PipeItem(PipeItem.Material.CLAY, props("clay_pipe")
+            .durability(PipeItem.Material.CLAY.durability)
+            .component(DataComponents.BREAK_SOUND, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.DECORATED_POT_SHATTER))));
+
+    public static final Item GLASS_PIPE = register("glass_pipe",
+        new PipeItem(PipeItem.Material.GLASS, props("glass_pipe")
+            .durability(PipeItem.Material.GLASS.durability)
+            .component(DataComponents.BREAK_SOUND, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.GLASS_BREAK))));
 
     public static final Item JOINT = register("joint",
         new JointItem(props("joint").stacksTo(16)));
@@ -52,8 +64,10 @@ public class ModItems {
         ResourceKey<CreativeModeTab> tools = ResourceKey.create(Registries.CREATIVE_MODE_TAB,
             Identifier.withDefaultNamespace("tools"));
         CreativeModeTabEvents.modifyOutputEvent(tools).register(output -> {
-            output.prepend(PIPE);
             output.prepend(JOINT);
+            output.prepend(GLASS_PIPE);
+            output.prepend(CLAY_PIPE);
+            output.prepend(PIPE);
         });
     }
 }

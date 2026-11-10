@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " B",
+    "BB",
+    "B "
+  ],
+  "key": {
+    "B": "minecraft:brick"
+  },
+  "result": { "id": "magicherb:clay_pipe", "count": 1 }
+}

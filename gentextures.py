@@ -6,6 +6,7 @@ count every pixel before editing the real 16x16 files.
 """
 from PIL import Image, ImageDraw
 import os
+import sys
 
 # ── colour palette ──────────────────────────────────────────────────────────
 T = (  0,   0,   0,   0)   # transparent
@@ -23,10 +24,19 @@ s = ( 75, 115,  45, 255)   # seed dark
 S = (120, 165,  75, 255)   # seed light
 O = (210, 140,  40, 255)   # orange-brown (dried)
 o = (165, 100,  35, 255)   # dark dried
+Q = ( 45, 115, 135, 255)   # glass outline (teal)
+q = (175, 225, 235, 255)   # glass body
+h = (240, 252, 255, 255)   # glass highlight
+K = (120,  72,  48, 255)   # fired clay outline
+c = (234, 200, 165, 255)   # fired clay light
+m = (205, 155, 115, 255)   # fired clay shade
+e = (240, 130,  40, 255)   # ember
 
 PALETTE = {'.': T, 'G': G, 'g': g, 'l': l, 'y': y,
            'B': B, 'b': b, 't': t, 'D': D, 'W': W,
-           'w': w, 's': s, 'S': S, 'O': O, 'o': o}
+           'w': w, 's': s, 'S': S, 'O': O, 'o': o,
+           'Q': Q, 'q': q, 'h': h, 'K': K, 'c': c,
+           'm': m, 'e': e}
 
 # ── pixel-art designs (16 rows × 16 cols) ───────────────────────────────────
 DESIGNS = {}
@@ -107,6 +117,46 @@ DESIGNS['item/pipe'] = [
     '....DDDDDDDDD...',
     '................',
     '................',
+    '................',
+    '................',
+]
+
+# clay_pipe — long-stemmed fired-clay pipe, ember glowing in the bowl
+DESIGNS['item/clay_pipe'] = [
+    '................',
+    '................',
+    '..........KKKK..',
+    '.........KDeDDK.',
+    '.........KccccK.',
+    '.........KcccmK.',
+    '........KccccmK.',
+    '.......KcmKmmK..',
+    '......KcmK.KK...',
+    '.....KcmK.......',
+    '....KcmK........',
+    '...KcmK.........',
+    '..KcmK..........',
+    '.KcmK...........',
+    '.KmK............',
+    '..K.............',
+]
+
+# glass_pipe — spoon pipe with a green swirl and a bowl hole at the bulb
+DESIGNS['item/glass_pipe'] = [
+    '................',
+    '.........QQQQ...',
+    '........QqhhqQ..',
+    '.......QqDDDhqQ.',
+    '.......QhDDDgqQ.',
+    '.......QhqDggqQ.',
+    '......QhqggqqQ..',
+    '.....QhqgqQQQ...',
+    '....QhqgqQ......',
+    '...QhqgqQ.......',
+    '..QhqgqQ........',
+    '.QhqgqQ.........',
+    '.QhqqQ..........',
+    '.QQQQ...........',
     '................',
     '................',
 ]
@@ -350,10 +400,19 @@ def make_preview(img16, scale=10):
 
 # ── main ─────────────────────────────────────────────────────────────────────
 
-BASE = '/home/zako/magicherb/src/main/resources/assets/magicherb/textures'
-PREVIEW_BASE = '/home/zako/magicherb/texture_previews'
+ROOT = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.join(ROOT, 'src/main/resources/assets/magicherb/textures')
+PREVIEW_BASE = os.path.join(ROOT, 'texture_previews')
 
-for path, design in DESIGNS.items():
+# Pass design names (e.g. item/glass_pipe) to write only those; with no args every
+# texture is regenerated, which overwrites any hand-edited art.
+selected = sys.argv[1:] or list(DESIGNS)
+unknown = [p for p in selected if p not in DESIGNS]
+if unknown:
+    sys.exit(f'Unknown design(s): {", ".join(unknown)}')
+
+for path in selected:
+    design = DESIGNS[path]
     # real 16×16 texture
     dest = os.path.join(BASE, path + '.png')
     os.makedirs(os.path.dirname(dest), exist_ok=True)

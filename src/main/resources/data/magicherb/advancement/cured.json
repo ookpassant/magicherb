@@ -1,0 +1,15 @@
+{
+  "display": {
+    "icon": { "id": "magicherb:dried_herb" },
+    "title": { "translate": "advancement.magicherb.cured.title" },
+    "description": { "translate": "advancement.magicherb.cured.desc" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "magicherb:first_smoke",
+  "criteria": {
+    "magicherb": { "trigger": "minecraft:impossible" }
+  }
+}

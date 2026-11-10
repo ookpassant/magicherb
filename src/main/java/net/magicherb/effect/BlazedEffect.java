@@ -14,7 +14,7 @@ public class BlazedEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(ServerLevel world, LivingEntity entity, int amplifier) {
         if (entity.getHealth() < entity.getMaxHealth()) {
-            entity.heal(0.5f);
+            entity.heal(0.5f * (amplifier + 1));
         }
         return true;
     }

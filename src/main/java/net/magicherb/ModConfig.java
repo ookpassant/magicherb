@@ -20,9 +20,11 @@ public class ModConfig {
     public double pipe_aoe_range                 = 5.0;
     public double joint_aoe_range                = 4.0;
     public double bad_trip_chance                = 0.03;
-    public int    herb_spawn_rarity              = 8;
+    public int    herb_spawn_rarity              = 6;
     public int    herb_spawn_rarity_lush         = 3;
     public float  hunger_exhaustion              = 3.0f;
+    public int    indoor_min_block_light         = 12;
+    public int    indoor_potency_bonus           = 1;
 
     public static void load() {
         Path file = FabricLoader.getInstance().getConfigDir().resolve("magicherb.json");

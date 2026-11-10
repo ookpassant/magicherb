@@ -1,17 +1,15 @@
 package net.magicherb.item;
 
+import net.magicherb.MagicHerbMod;
 import net.magicherb.ModAdvancements;
 import net.magicherb.ModConfig;
-import net.magicherb.effect.ModEffects;
-import net.magicherb.network.ModPackets;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,17 +18,41 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
-
 public class PipeItem extends Item {
 
-    public PipeItem(Properties settings) {
+    public static final TagKey<Item> SMOKES = TagKey.create(Registries.ITEM,
+        Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, "smokes"));
+
+    public enum Material {
+        WOOD (64,  1.0f,  1.0f,  0.0, 1.5f),
+        CLAY (160, 1.25f, 1.0f,  0.0, 1.3f),
+        GLASS(32,  0.75f, 1.25f, 1.0, 1.7f);
+
+        public final int durability;
+        final float useTimeMultiplier;
+        final float durationMultiplier;
+        final double extraRange;
+        final float pitch;
+
+        Material(int durability, float useTimeMultiplier, float durationMultiplier, double extraRange, float pitch) {
+            this.durability = durability;
+            this.useTimeMultiplier = useTimeMultiplier;
+            this.durationMultiplier = durationMultiplier;
+            this.extraRange = extraRange;
+            this.pitch = pitch;
+        }
+    }
+
+    private final Material material;
+
+    public PipeItem(Material material, Properties settings) {
         super(settings);
+        this.material = material;
     }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        if (isHerb(player.getOffhandItem())) {
+        if (player.getOffhandItem().is(SMOKES)) {
             player.startUsingItem(hand);
             return InteractionResult.CONSUME;
         }
@@ -42,57 +64,26 @@ public class PipeItem extends Item {
         if (!(level instanceof ServerLevel serverLevel) || !(user instanceof ServerPlayer player)) return stack;
 
         ItemStack offhand = player.getOffhandItem();
-        if (!isHerb(offhand)) return stack;
+        if (!offhand.is(SMOKES)) return stack;
 
-        boolean dried    = offhand.is(ModItems.DRIED_HERB);
-        boolean badTrip  = Math.random() < ModConfig.INSTANCE.bad_trip_chance;
+        boolean dried  = offhand.is(ModItems.DRIED_HERB);
+        boolean indoor = offhand.has(ModComponents.INDOOR_GROWN);
         offhand.shrink(1);
 
-        applyEffects(player, dried, 1.0f, badTrip);
+        ModConfig cfg = ModConfig.INSTANCE;
+        double driedMultiplier = dried ? cfg.dried_herb_duration_multiplier : 1.0;
+        int base = (int) (cfg.effect_base_duration * material.durationMultiplier * driedMultiplier);
 
-        List<ServerPlayer> nearby = serverLevel.getEntitiesOfClass(
-            ServerPlayer.class,
-            player.getBoundingBox().inflate(ModConfig.INSTANCE.pipe_aoe_range),
-            p -> p != player && !p.isSpectator()
-        );
-        nearby.forEach(p -> applyEffects(p, dried, 0.5f, false));
+        Smoke.take(serverLevel, player, base, indoor, cfg.pipe_aoe_range + material.extraRange, material.pitch);
+        if (dried) ModAdvancements.grant(player, "cured");
 
         stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-
-        ModPackets.sendSmoke(player, player.position());
-        level.playSound(null, player.blockPosition(),
-            SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS, 0.3f, 1.5f);
-
-        ModAdvancements.grant(player, "first_smoke");
-        if (!nearby.isEmpty()) ModAdvancements.grant(player, "sharing_is_caring");
-        if (badTrip)           ModAdvancements.grant(player, "bad_trip");
-
         return stack;
-    }
-
-    private void applyEffects(ServerPlayer player, boolean dried, float potency, boolean badTrip) {
-        ModConfig cfg = ModConfig.INSTANCE;
-        int base = (int)(cfg.effect_base_duration * (dried ? cfg.dried_herb_duration_multiplier : 1.0));
-        int dur  = Math.round(base * potency);
-
-        if (badTrip) {
-            player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, Math.round(300 * potency), 0, false, true));
-            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS,  Math.round(200 * potency), 0, false, true));
-        } else {
-            player.addEffect(new MobEffectInstance(ModEffects.BLAZED,           Math.round(base * 1.5f * potency), 0, false, true));
-            player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS,         dur,     0, false, false));
-            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION,     dur / 2, 0, false, false));
-        }
-        player.getFoodData().addExhaustion(cfg.hunger_exhaustion * potency);
-    }
-
-    private boolean isHerb(ItemStack stack) {
-        return stack.is(ModItems.MAGIC_HERB) || stack.is(ModItems.DRIED_HERB);
     }
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity user) {
-        return ModConfig.INSTANCE.pipe_use_ticks;
+        return Math.round(ModConfig.INSTANCE.pipe_use_ticks * material.useTimeMultiplier);
     }
 
     @Override

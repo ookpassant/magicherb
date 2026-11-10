@@ -3,6 +3,8 @@ package net.magicherb.world;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.magicherb.MagicHerbMod;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -24,6 +26,9 @@ public class ModWorldGen {
     );
 
     public static void register() {
+        Registry.register(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,
+            Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, "config_rarity"), ConfigRarityFilter.CODEC);
+
         // Base spawn in all overworld biomes
         BiomeModifications.addFeature(
             BiomeSelectors.foundInOverworld(),
