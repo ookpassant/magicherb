@@ -3,19 +3,115 @@
   "pools": [
     {
       "rolls": 1,
-      "entries": [{
-        "type": "minecraft:item",
-        "name": "magicherb:magic_herb",
-        "modifier": { "type": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 1, "max": 2 } }
-      }]
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "magicherb:magic_herb",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "energising"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:wild_herb_plant",
+                "state": {
+                  "strain": "energising"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "sedating"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:wild_herb_plant",
+                "state": {
+                  "strain": "sedating"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "creative"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:wild_herb_plant",
+                "state": {
+                  "strain": "creative"
+                }
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "rolls": 1,
-      "entries": [{
-        "type": "minecraft:item",
-        "name": "magicherb:herb_seeds",
-        "condition": { "type": "minecraft:random_chance", "chance": 0.5 }
-      }]
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "magicherb:herb_seeds",
+          "condition": {
+            "type": "minecraft:random_chance",
+            "chance": 0.5
+          },
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "energising"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:wild_herb_plant",
+                "state": {
+                  "strain": "energising"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "sedating"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:wild_herb_plant",
+                "state": {
+                  "strain": "sedating"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "creative"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:wild_herb_plant",
+                "state": {
+                  "strain": "creative"
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

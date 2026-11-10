@@ -1,4 +1,8 @@
 {
   "replace": false,
-  "values": ["magicherb:magic_herb", "magicherb:dried_herb"]
+  "values": [
+    "magicherb:magic_herb",
+    "magicherb:dried_herb",
+    "magicherb:ground_herb"
+  ]
 }

@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.magicherb.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "RandomizableContainerBlockEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

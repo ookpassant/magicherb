@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "misc",
+  "input": "magicherb:ground_herb",
+  "material": "minecraft:paper",
+  "result": {
+    "id": "magicherb:joint",
+    "count": 2
+  }
+}

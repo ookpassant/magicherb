@@ -29,8 +29,7 @@ public class JointItem extends Item {
         if (!(level instanceof ServerLevel serverLevel) || !(user instanceof ServerPlayer player)) return stack;
 
         ModConfig cfg = ModConfig.INSTANCE;
-        boolean indoor = stack.has(ModComponents.INDOOR_GROWN);
-        Smoke.take(serverLevel, player, cfg.joint_effect_base_duration, indoor, cfg.joint_aoe_range, 1.6f);
+        Smoke.take(serverLevel, player, Smoke.Herb.of(stack), cfg.joint_effect_base_duration, 1.0f, cfg.joint_aoe_range, 1.6f);
 
         stack.shrink(1);
         return stack;

@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class ModItems {
 
@@ -20,7 +21,10 @@ public class ModItems {
         new Item(props("magic_herb").stacksTo(64)));
 
     public static final Item DRIED_HERB = register("dried_herb",
-        new Item(props("dried_herb").stacksTo(64)));
+        new DriedHerbItem(props("dried_herb").stacksTo(64)));
+
+    public static final Item GROUND_HERB = register("ground_herb",
+        new Item(props("ground_herb").stacksTo(64)));
 
     public static final Item HERB_SEEDS = register("herb_seeds",
         new BlockItem(ModBlocks.HERB_CROP, props("herb_seeds").stacksTo(64)));
@@ -42,6 +46,15 @@ public class ModItems {
     public static final Item JOINT = register("joint",
         new JointItem(props("joint").stacksTo(16)));
 
+    public static final Item GRINDER = register("grinder",
+        new GrinderItem(props("grinder").durability(128)));
+
+    public static final Item BONG = register("bong",
+        new BlockItem(ModBlocks.BONG, props("bong").useBlockDescriptionPrefix()));
+
+    public static final Item ROLLING_TABLE = register("rolling_table",
+        new BlockItem(ModBlocks.ROLLING_TABLE, props("rolling_table").useBlockDescriptionPrefix()));
+
     private static Item.Properties props(String name) {
         return new Item.Properties().setId(
             ResourceKey.create(Registries.ITEM,
@@ -53,22 +66,38 @@ public class ModItems {
             Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, name), item);
     }
 
+    private static ResourceKey<CreativeModeTab> tab(String name) {
+        return ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace(name));
+    }
+
     public static void register() {
-        ResourceKey<CreativeModeTab> natural = ResourceKey.create(Registries.CREATIVE_MODE_TAB,
-            Identifier.withDefaultNamespace("natural"));
-        CreativeModeTabEvents.modifyOutputEvent(natural).register(output -> {
-            output.prepend(MAGIC_HERB);
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,
+            Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, "herb_drying"), HerbDryingRecipe.SERIALIZER);
+
+        CreativeModeTabEvents.modifyOutputEvent(tab("natural")).register(output -> {
+            output.prepend(GROUND_HERB);
             output.prepend(DRIED_HERB);
+            output.prepend(MAGIC_HERB);
             output.prepend(HERB_SEEDS);
+            for (Strain strain : Strain.values()) {
+                if (strain == Strain.CLASSIC) continue;
+                ItemStack seeds = new ItemStack(HERB_SEEDS);
+                seeds.set(ModComponents.STRAIN, strain);
+                output.accept(seeds);
+            }
         });
 
-        ResourceKey<CreativeModeTab> tools = ResourceKey.create(Registries.CREATIVE_MODE_TAB,
-            Identifier.withDefaultNamespace("tools"));
-        CreativeModeTabEvents.modifyOutputEvent(tools).register(output -> {
+        CreativeModeTabEvents.modifyOutputEvent(tab("tools")).register(output -> {
+            output.prepend(GRINDER);
             output.prepend(JOINT);
             output.prepend(GLASS_PIPE);
             output.prepend(CLAY_PIPE);
             output.prepend(PIPE);
+        });
+
+        CreativeModeTabEvents.modifyOutputEvent(tab("functional_blocks")).register(output -> {
+            output.prepend(ROLLING_TABLE);
+            output.prepend(BONG);
         });
     }
 }

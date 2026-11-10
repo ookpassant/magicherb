@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    " P ",
+    "GGG"
+  ],
+  "key": {
+    "P": "minecraft:glass_pane",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "magicherb:bong"
+  }
+}

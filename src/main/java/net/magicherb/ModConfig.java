@@ -25,6 +25,12 @@ public class ModConfig {
     public float  hunger_exhaustion              = 3.0f;
     public int    indoor_min_block_light         = 12;
     public int    indoor_potency_bonus           = 1;
+    public double bong_aoe_range                 = 8.0;
+    public int    bong_capacity                  = 8;
+    public int    bong_cooldown_ticks            = 40;
+    public int    rolling_table_joints_per_herb  = 3;
+    public int    aging_ticks                    = 24000;
+    public double aged_duration_multiplier       = 1.5;
 
     public static void load() {
         Path file = FabricLoader.getInstance().getConfigDir().resolve("magicherb.json");

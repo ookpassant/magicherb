@@ -3,40 +3,140 @@
   "pools": [
     {
       "rolls": 1,
-      "entries": [{
-        "type": "minecraft:item",
-        "name": "magicherb:herb_seeds"
-      }]
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "magicherb:herb_seeds",
+          "modifier": [
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "energising"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "strain": "energising"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "sedating"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "strain": "sedating"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "creative"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "strain": "creative"
+                }
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "rolls": 1,
       "condition": {
         "type": "minecraft:match_block",
         "blocks": "magicherb:herb_crop",
-        "state": { "age": "7" }
+        "state": {
+          "age": "7"
+        }
       },
-      "entries": [{
-        "type": "minecraft:item",
-        "name": "magicherb:magic_herb",
-        "modifier": [
-          { "type": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 1, "max": 3 } },
-          {
-            "type": "minecraft:apply_bonus",
-            "enchantment": "minecraft:fortune",
-            "formula": "minecraft:binomial_with_bonus_count",
-            "parameters": { "extra": 3, "probability": 0.5714286 }
-          },
-          {
-            "type": "minecraft:set_components",
-            "components": { "magicherb:indoor_grown": {} },
-            "condition": {
-              "type": "minecraft:match_block",
-              "blocks": "magicherb:herb_crop",
-              "state": { "indoor": "true" }
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "magicherb:magic_herb",
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            },
+            {
+              "type": "minecraft:apply_bonus",
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "parameters": {
+                "extra": 3,
+                "probability": 0.5714286
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:indoor_grown": {}
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "indoor": "true"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "energising"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "strain": "energising"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "sedating"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "strain": "sedating"
+                }
+              }
+            },
+            {
+              "type": "minecraft:set_components",
+              "components": {
+                "magicherb:strain": "creative"
+              },
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "magicherb:herb_crop",
+                "state": {
+                  "strain": "creative"
+                }
+              }
             }
-          }
-        ]
-      }]
+          ]
+        }
+      ]
     }
   ]
 }

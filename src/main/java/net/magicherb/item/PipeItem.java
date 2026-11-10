@@ -73,20 +73,16 @@ public class PipeItem extends Item {
         ItemStack offhand = player.getOffhandItem();
         if (!offhand.is(SMOKES)) return stack;
 
-        boolean dried  = offhand.is(ModItems.DRIED_HERB);
-        boolean indoor = offhand.has(ModComponents.INDOOR_GROWN);
+        Smoke.Herb herb = Smoke.Herb.of(offhand);
         offhand.shrink(1);
 
         ModConfig cfg = ModConfig.INSTANCE;
-        double driedMultiplier = dried ? cfg.dried_herb_duration_multiplier : 1.0;
-        int base = (int) (cfg.effect_base_duration * material.durationMultiplier * driedMultiplier);
-
         int hotbox = serverLevel.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(HOTBOX)
             .map(h -> EnchantmentHelper.getItemEnchantmentLevel(h, stack)).orElse(0);
         double range = cfg.pipe_aoe_range + material.extraRange + hotbox * HOTBOX_RANGE_PER_LEVEL;
 
-        Smoke.take(serverLevel, player, base, indoor, range, material.pitch);
-        if (dried) ModAdvancements.grant(player, "cured");
+        Smoke.take(serverLevel, player, herb, cfg.effect_base_duration, material.durationMultiplier, range, material.pitch);
+        if (herb.dried()) ModAdvancements.grant(player, "cured");
 
         stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
         return stack;

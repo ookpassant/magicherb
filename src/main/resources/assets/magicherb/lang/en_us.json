@@ -1,41 +1,48 @@
 {
-  "item.magicherb.magic_herb":  "Magic Herb",
-  "item.magicherb.dried_herb":  "Dried Herb",
-  "item.magicherb.herb_seeds":  "Herb Seeds",
-  "item.magicherb.pipe":        "Wizard's Pipe",
-  "item.magicherb.clay_pipe":   "Clay Pipe",
-  "item.magicherb.glass_pipe":  "Glass Pipe",
-  "item.magicherb.joint":       "Herbal Blend",
-
+  "item.magicherb.magic_herb": "Magic Herb",
+  "item.magicherb.dried_herb": "Dried Herb",
+  "item.magicherb.herb_seeds": "Herb Seeds",
+  "item.magicherb.pipe": "Wizard's Pipe",
+  "item.magicherb.clay_pipe": "Clay Pipe",
+  "item.magicherb.glass_pipe": "Glass Pipe",
+  "item.magicherb.joint": "Herbal Blend",
   "tooltip.magicherb.indoor_grown": "Indoor-grown (extra potent)",
-  "tag.item.magicherb.smokes":      "Smokeable Herbs",
-
+  "tag.item.magicherb.smokes": "Smokeable Herbs",
   "block.magicherb.wild_herb_plant": "Wild Herb",
-  "block.magicherb.herb_crop":       "Herb Crop",
-
+  "block.magicherb.herb_crop": "Herb Crop",
   "effect.magicherb.blazed": "Blazed",
-
   "enchantment.magicherb.hotbox": "Hotbox",
   "tag.item.magicherb.enchantable.pipe": "Enchantable Pipes",
-
-  "advancement.magicherb.root.title":              "Magic Herb",
-  "advancement.magicherb.root.desc":               "Found some wild herb growing in the world",
-
-  "advancement.magicherb.first_smoke.title":       "First Hit",
-  "advancement.magicherb.first_smoke.desc":        "Smoke some magic herb for the first time",
-
+  "advancement.magicherb.root.title": "Magic Herb",
+  "advancement.magicherb.root.desc": "Found some wild herb growing in the world",
+  "advancement.magicherb.first_smoke.title": "First Hit",
+  "advancement.magicherb.first_smoke.desc": "Smoke some magic herb for the first time",
   "advancement.magicherb.sharing_is_caring.title": "Sharing is Caring",
-  "advancement.magicherb.sharing_is_caring.desc":  "Pass the good vibes to a nearby friend",
-
-  "advancement.magicherb.green_thumb.title":       "Green Thumb",
-  "advancement.magicherb.green_thumb.desc":        "Harvest a fully grown herb crop",
-
-  "advancement.magicherb.bad_trip.title":          "Bad Trip",
-  "advancement.magicherb.bad_trip.desc":           "Sometimes the herb has other plans...",
-
-  "advancement.magicherb.cured.title":             "Cured",
-  "advancement.magicherb.cured.desc":              "Smoke some dried herb in a pipe",
-
-  "advancement.magicherb.grow_room.title":         "Grow Room",
-  "advancement.magicherb.grow_room.desc":          "Harvest a herb crop grown indoors under artificial light"
+  "advancement.magicherb.sharing_is_caring.desc": "Pass the good vibes to a nearby friend",
+  "advancement.magicherb.green_thumb.title": "Green Thumb",
+  "advancement.magicherb.green_thumb.desc": "Harvest a fully grown herb crop",
+  "advancement.magicherb.bad_trip.title": "Bad Trip",
+  "advancement.magicherb.bad_trip.desc": "Sometimes the herb has other plans...",
+  "advancement.magicherb.cured.title": "Cured",
+  "advancement.magicherb.cured.desc": "Smoke some dried herb in a pipe",
+  "advancement.magicherb.grow_room.title": "Grow Room",
+  "advancement.magicherb.grow_room.desc": "Harvest a herb crop grown indoors under artificial light",
+  "item.magicherb.ground_herb": "Ground Herb",
+  "item.magicherb.grinder": "Herb Grinder",
+  "block.magicherb.bong": "Bong",
+  "block.magicherb.rolling_table": "Rolling Table",
+  "strain.magicherb.classic": "Classic",
+  "strain.magicherb.energising": "Energising",
+  "strain.magicherb.sedating": "Sedating",
+  "strain.magicherb.creative": "Creative",
+  "tooltip.magicherb.strain": "%s strain",
+  "tooltip.magicherb.aged": "Barrel-aged (smooth, no bad trips)",
+  "tooltip.magicherb.curing": "Aging in barrel: %s%%",
+  "message.magicherb.bong_loaded": "Bong loaded (%s/%s)",
+  "message.magicherb.bong_full": "The bong is full",
+  "message.magicherb.bong_empty": "The bong is empty - load it with herb",
+  "message.magicherb.rolling_needs_paper": "You need paper in your inventory to roll",
+  "message.magicherb.rolled": "Rolled %s joints",
+  "tag.item.magicherb.rollable": "Rollable Herbs",
+  "tag.item.magicherb.ageable": "Ageable Herbs"
 }

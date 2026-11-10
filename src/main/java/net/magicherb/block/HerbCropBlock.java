@@ -3,6 +3,8 @@ package net.magicherb.block;
 import net.magicherb.ModAdvancements;
 import net.magicherb.ModConfig;
 import net.magicherb.item.ModItems;
+import net.magicherb.item.Strain;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,21 +27,24 @@ public class HerbCropBlock extends CropBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
     // True while every growth step so far happened indoors under artificial light.
     public static final BooleanProperty INDOOR = BooleanProperty.create("indoor");
+    public static final EnumProperty<Strain> STRAIN = WildHerbBlock.STRAIN;
 
     public HerbCropBlock(Properties settings) {
         super(settings);
-        registerDefaultState(defaultBlockState().setValue(INDOOR, false));
+        registerDefaultState(defaultBlockState().setValue(INDOOR, false).setValue(STRAIN, Strain.CLASSIC));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(INDOOR);
+        builder.add(INDOOR, STRAIN);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(INDOOR, true);
+        return defaultBlockState()
+            .setValue(INDOOR, true)
+            .setValue(STRAIN, Strain.of(context.getItemInHand()));
     }
 
     @Override
@@ -60,22 +65,23 @@ public class HerbCropBlock extends CropBlock {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
-        carryIndoorFlag(level, pos, state);
+        carryState(level, pos, state);
     }
 
     @Override
     public void growCrops(Level level, BlockPos pos, BlockState state) {
         super.growCrops(level, pos, state);
-        carryIndoorFlag(level, pos, state);
+        carryState(level, pos, state);
     }
 
-    // Vanilla growth rebuilds the state from the default, so re-apply the flag after each growth step.
-    private void carryIndoorFlag(Level level, BlockPos pos, BlockState before) {
+    // Vanilla growth rebuilds the state from the default, so re-apply strain and indoor flag after each growth step.
+    private void carryState(Level level, BlockPos pos, BlockState before) {
         BlockState after = level.getBlockState(pos);
         if (!after.is(this) || after == before) return;
         boolean indoor = before.getValue(INDOOR) && isUnderArtificialLight(level, pos);
-        if (after.getValue(INDOOR) != indoor) {
-            level.setBlock(pos, after.setValue(INDOOR, indoor), Block.UPDATE_CLIENTS);
+        BlockState fixed = after.setValue(INDOOR, indoor).setValue(STRAIN, before.getValue(STRAIN));
+        if (fixed != after) {
+            level.setBlock(pos, fixed, Block.UPDATE_CLIENTS);
         }
     }
 
