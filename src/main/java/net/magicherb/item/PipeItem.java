@@ -5,6 +5,7 @@ import net.magicherb.ModAdvancements;
 import net.magicherb.ModConfig;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -16,12 +17,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
 public class PipeItem extends Item {
 
     public static final TagKey<Item> SMOKES = TagKey.create(Registries.ITEM,
         Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, "smokes"));
+
+    public static final ResourceKey<Enchantment> HOTBOX = ResourceKey.create(Registries.ENCHANTMENT,
+        Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, "hotbox"));
+    private static final double HOTBOX_RANGE_PER_LEVEL = 2.0;
 
     public enum Material {
         WOOD (64,  1.0f,  1.0f,  0.0, 1.5f),
@@ -74,7 +81,11 @@ public class PipeItem extends Item {
         double driedMultiplier = dried ? cfg.dried_herb_duration_multiplier : 1.0;
         int base = (int) (cfg.effect_base_duration * material.durationMultiplier * driedMultiplier);
 
-        Smoke.take(serverLevel, player, base, indoor, cfg.pipe_aoe_range + material.extraRange, material.pitch);
+        int hotbox = serverLevel.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(HOTBOX)
+            .map(h -> EnchantmentHelper.getItemEnchantmentLevel(h, stack)).orElse(0);
+        double range = cfg.pipe_aoe_range + material.extraRange + hotbox * HOTBOX_RANGE_PER_LEVEL;
+
+        Smoke.take(serverLevel, player, base, indoor, range, material.pitch);
         if (dried) ModAdvancements.grant(player, "cured");
 
         stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);

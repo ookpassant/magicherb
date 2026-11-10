@@ -36,6 +36,7 @@ public class ModItems {
     public static final Item GLASS_PIPE = register("glass_pipe",
         new PipeItem(PipeItem.Material.GLASS, props("glass_pipe")
             .durability(PipeItem.Material.GLASS.durability)
+            .enchantable(15)
             .component(DataComponents.BREAK_SOUND, BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.GLASS_BREAK))));
 
     public static final Item JOINT = register("joint",

@@ -22,12 +22,18 @@ A Fabric mod for Minecraft 26.3 that lets you cultivate and share a smoke with y
 |------|------|----------|-----------------|-------------|-------|
 | **Wizard's Pipe** (wood) | 64 | ~2 s | 1× | 5 blocks | The all-rounder. |
 | **Clay Pipe** | 160 | ~2.5 s | 1× | 5 blocks | Built to last; shatters like pottery when it finally breaks. |
-| **Glass Pipe** | 32 | ~1.5 s | 1.25× | 6 blocks | Smoothest hit, but fragile. |
+| **Glass Pipe** | 32 | ~1.5 s | 1.25× | 6 blocks | Smoothest hit, but fragile. The only enchantable pipe. |
+
+### Enchanting Glass Pipes
+Glass pipes can be enchanted at an enchanting table or with books on an anvil:
+- **Unbreaking I–III**: from the enchanting table, like any tool.
+- **Mending**: from books (villagers, loot), like any tool.
+- **Hotbox I–II**: new. Each level adds **2 blocks** to the sharing range (6 → 8 → 10). Shows up at the enchanting table, on books, from villagers and in loot. Glass pipes only.
 
 ### Indoor Growing
 Herb crops grown **indoors under artificial light** produce extra-potent herb. A crop counts as indoor-grown if, every time it grows a stage, it is lit to at least **block light 12** by lamps (torches, lanterns, glowstone…) and that lamp light is **brighter than any daylight** reaching it. A sealed grow room or a basement works; a greenhouse or an open field doesn't. Get the lights in before the crop's first growth stage — one stage grown in daylight and the batch is ordinary.
 
-Indoor-grown herb shows **"Indoor-grown"** in its tooltip and keeps that through drying and joint rolling. Smoking it gives **Blazed II** and **Regeneration II** instead of level I, and it stacks with the dried-herb duration bonus.
+Indoor-grown herb has its own frosty look, shows **"Indoor-grown"** in its tooltip, and keeps both through drying and joint rolling. Smoking it gives **Blazed II** and **Regeneration II** instead of level I, and it stacks with the dried-herb duration bonus.
 
 ### Smoking Effects
 When you smoke (pipe or joint), you and nearby players receive:
@@ -134,7 +140,14 @@ Edit the 16×16 files directly, then rebuild.
 ## TODO / Planned
 
 ### High Priority
-- [ ] **Proper textures** — current placeholders are functional pixel art but need artist love. Grid previews in `texture_previews/` show the pixel layout at 10× scale.
+- [ ] **Proper textures** — current placeholders are functional pixel art but need artist love. All paths are under `src/main/resources/assets/magicherb/`; replace a file with the same name and size to swap it in.
+  - [x] `textures/item/magic_herb.png`, `dried_herb.png`, `herb_seeds.png` (16×16, hand-drawn)
+  - [ ] `textures/item/pipe.png`, `clay_pipe.png`, `glass_pipe.png`, `joint.png` (16×16; pipes drawn diagonally, mouthpiece bottom-left)
+  - [ ] `textures/item/magic_herb_indoor.png`, `dried_herb_indoor.png`, `joint_indoor.png` (16×16; indoor-grown versions, currently "frosted" copies)
+  - [ ] `textures/block/wild_herb_plant.png` (16×16; shown as two crossed planes like tall grass)
+  - [ ] `textures/block/herb_crop_stage0.png` … `herb_crop_stage7.png` (16×16; shown in a `#` like wheat, stage 7 = harvestable)
+  - [ ] `textures/mob_effect/blazed.png` (18×18; effect icon)
+  - [ ] `icon.png` (128×128; mod icon in mod lists, currently the magic herb scaled up)
 - [ ] **Client-side mod** — players need the mod installed client-side to see smoke particles. Consider making the client portion optional or adding a server-only mode.
 
 ### Gameplay
@@ -152,7 +165,7 @@ Edit the 16×16 files directly, then rebuild.
 - [ ] **Sounds** — custom inhale/exhale sounds; the fire extinguish placeholder is functional but rough
 - [ ] **Smoke particle colour** — tint the smoke green when Blazed, grey otherwise
 - [x] **Pipe break animation** — vanilla break animation, plus glass-shatter and pottery-shatter sounds for the glass and clay pipes
-- [ ] **Effect icons** — custom HUD icon for the Blazed effect (currently uses a placeholder)
+- [ ] **Effect icons** — custom HUD icon for the Blazed effect (currently uses a placeholder; see Proper textures)
 - [x] **Advancement tree** — First Hit, Sharing is Caring, Cured, Green Thumb, Grow Room, Bad Trip
 - [x] **Wild herb biome weighting** — spawns more in jungles, savannas, plains, meadows and flower forests
 

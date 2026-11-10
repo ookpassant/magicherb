@@ -1,1 +1,9 @@
-{ "model": { "type": "minecraft:model", "model": "magicherb:item/joint" } }
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "minecraft:has_component",
+    "component": "magicherb:indoor_grown",
+    "on_true":  { "type": "minecraft:model", "model": "magicherb:item/joint_indoor" },
+    "on_false": { "type": "minecraft:model", "model": "magicherb:item/joint" }
+  }
+}

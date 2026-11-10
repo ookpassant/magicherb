@@ -6,6 +6,7 @@
   "description": "Cultivate wild herb and share a smoke with your friends.",
   "authors": ["zako"],
   "license": "MIT",
+  "icon": "assets/magicherb/icon.png",
   "environment": "*",
   "entrypoints": {
     "main":   ["net.magicherb.MagicHerbMod"],

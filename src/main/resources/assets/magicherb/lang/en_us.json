@@ -15,6 +15,9 @@
 
   "effect.magicherb.blazed": "Blazed",
 
+  "enchantment.magicherb.hotbox": "Hotbox",
+  "tag.item.magicherb.enchantable.pipe": "Enchantable Pipes",
+
   "advancement.magicherb.root.title":              "Magic Herb",
   "advancement.magicherb.root.desc":               "Found some wild herb growing in the world",
 
