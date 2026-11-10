@@ -43,13 +43,6 @@ public class ModBlocks {
         )
     );
 
-    public static final Block ROLLING_TABLE = register("rolling_table",
-        new RollingTableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)
-            .setId(key("rolling_table"))
-            .noOcclusion()
-        )
-    );
-
     public static final BlockEntityType<BongBlockEntity> BONG_ENTITY = Registry.register(
         BuiltInRegistries.BLOCK_ENTITY_TYPE,
         Identifier.fromNamespaceAndPath(MagicHerbMod.MOD_ID, "bong"),

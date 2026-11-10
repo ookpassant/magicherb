@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "top": "magicherb:block/rolling_table_top",
-    "side": "magicherb:block/rolling_table_side",
-    "bottom": "minecraft:block/oak_planks"
-  }
-}

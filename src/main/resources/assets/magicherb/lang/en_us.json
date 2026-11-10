@@ -30,7 +30,6 @@
   "item.magicherb.ground_herb": "Ground Herb",
   "item.magicherb.grinder": "Herb Grinder",
   "block.magicherb.bong": "Bong",
-  "block.magicherb.rolling_table": "Rolling Table",
   "strain.magicherb.classic": "Classic",
   "strain.magicherb.energising": "Energising",
   "strain.magicherb.sedating": "Sedating",
@@ -41,8 +40,5 @@
   "message.magicherb.bong_loaded": "Bong loaded (%s/%s)",
   "message.magicherb.bong_full": "The bong is full",
   "message.magicherb.bong_empty": "The bong is empty - load it with herb",
-  "message.magicherb.rolling_needs_paper": "You need paper in your inventory to roll",
-  "message.magicherb.rolled": "Rolled %s joints",
-  "tag.item.magicherb.rollable": "Rollable Herbs",
   "tag.item.magicherb.ageable": "Ageable Herbs"
 }

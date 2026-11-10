@@ -1,16 +1,17 @@
 {
+  "fabric:load_conditions": [
+    { "condition": "fabric:all_mods_loaded", "values": ["techreborn"] }
+  ],
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "pattern": [
-    "I",
+    "A",
     "N",
-    "I"
+    "A"
   ],
   "key": {
-    "I": "minecraft:iron_ingot",
-    "N": "minecraft:iron_nugget"
+    "A": "techreborn:aluminum_ingot",
+    "N": "techreborn:aluminum_nugget"
   },
-  "result": {
-    "id": "magicherb:grinder"
-  }
+  "result": { "id": "magicherb:grinder" }
 }

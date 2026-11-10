@@ -36,10 +36,6 @@ U = ( 45,  90, 170, 255)   # deep water
 i = (205, 205, 210, 255)   # iron light
 I = (140, 140, 150, 255)   # iron mid
 j = ( 80,  80,  90, 255)   # iron dark
-r = (170, 125,  75, 255)   # plank light
-R = (120,  85,  45, 255)   # plank dark
-p = (240, 235, 215, 255)   # rolling paper
-Y = (205, 175,  95, 255)   # bamboo mat light
 v = (125,  70, 160, 255)   # purple fleck
 
 PALETTE = {'.': T, 'G': G, 'g': g, 'l': l, 'y': y,
@@ -47,8 +43,7 @@ PALETTE = {'.': T, 'G': G, 'g': g, 'l': l, 'y': y,
            'w': w, 's': s, 'S': S, 'O': O, 'o': o,
            'Q': Q, 'q': q, 'h': h, 'K': K, 'c': c,
            'm': m, 'e': e, 'u': u, 'U': U, 'i': i,
-           'I': I, 'j': j, 'r': r, 'R': R, 'p': p,
-           'Y': Y, 'v': v}
+           'I': I, 'j': j, 'v': v}
 
 # ── pixel-art designs (16 rows × 16 cols) ───────────────────────────────────
 DESIGNS = {}
@@ -212,34 +207,6 @@ DESIGNS['item/ground_herb'] = [
     '................',
     '................',
 ]
-
-# rolling_table_top — bamboo rolling mat, a sheet of paper and some crumbs
-DESIGNS['block/rolling_table_top'] = [
-    'RRRRRRRRRRRRRRRR',
-    'RrrrrrrrrrrrrrrR',
-    'RrYyYyYyYyYyYyrR',
-    'RrYyYyYyYyYyYyrR',
-    'RrYyYyYyYyYyYyrR',
-    'RrYyYyYyYyYyYyrR',
-    'RrYyYyYyYyYyYyrR',
-    'RrYyYyYyYyYyYyrR',
-    'RrrrrrrrrrrrrrrR',
-    'RrrpppppprrrrrrR',
-    'RrrpppppprrgGrrR',
-    'RrrppppppprGgrrR',
-    'RrrrrrrrrrrrrrrR',
-    'RrrrrrrrrrrrrrrR',
-    'RrrrrrrrrrrrrrrR',
-    'RRRRRRRRRRRRRRRR',
-]
-
-# rolling_table_side — table top band with legs in the corners
-DESIGNS['block/rolling_table_side'] = [
-    'RRRRRRRRRRRRRRRR',
-    'rrrrrrrrrrrrrrrr',
-    'rrrrrrrrrrrrrrrr',
-    'RRRRRRRRRRRRRRRR',
-] + ['RrR..........RrR'] * 12
 
 # bong — UV atlas for the bong model: mouthpiece hole (top-left), herb in bowl (top-right),
 # neck (cols 6-9), water chamber (bottom), bowl/downstem glass (bottom-right)

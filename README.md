@@ -14,7 +14,7 @@ A Fabric mod for Minecraft 26.3 that lets you cultivate and share a smoke with y
 | **Dried Herb** | Furnace-processed magic herb. Gives 2× effect duration when smoked. Can be aged in a barrel. |
 | **Ground Herb** | Magic herb run through a grinder: 1 herb → 2 ground herb. Rolls and smokes like magic herb. |
 | **Herb Seeds** | Dropped from wild or mature crops. Plant on farmland to grow your own. Seeds remember their strain. |
-| **Herb Grinder** | 128 uses. Craft it with magic herb to grind it; it comes back out of the grid one use more worn. |
+| **Herb Grinder** | 128 uses. Craft it with magic herb to grind it; it comes back out of the grid one use more worn. Made from Tech Reborn aluminium. |
 | **Pipes** | Reusable. Hold right-click with herb/dried herb in your offhand. Comes in wood, clay and glass (see below). |
 | **Joint** | Single-use. Right-click and hold for ~1.5 seconds. Crafted from magic herb (or ground herb) + paper. |
 
@@ -33,11 +33,8 @@ Every strain also gives Blazed. Plant a strain's seeds to farm it anywhere.
 ### Bong
 A placeable glass bong for groups. Right-click it holding herb to load it (up to 8 loads), then right-click with an empty hand (or any non-herb item) to take a hit. Anyone can use it, no waiting for the person before you, but each player has a 2-second cooldown between hits. Effects reach friends within **8 blocks**. Breaking the bong drops any herb still loaded.
 
-### Rolling Table
-Right-click the table holding magic herb or ground herb to roll the whole stack at once, using paper from anywhere in your inventory. Each herb + paper makes **3 joints** (2 in a crafting grid). Sneak-click to roll just one.
-
 ### Barrel Aging
-Put dried herb in a barrel and leave it. After **one Minecraft day** (20 minutes) it comes out **barrel-aged**: it shimmers, its effects last **1.5× longer** and it **never causes a bad trip**. Hover over herb in the barrel to see how far along it is. Taking it out early resets it; the rest of the stack keeps aging.
+Put dried herb in a barrel and leave it. After **five Minecraft days** (100 minutes) it comes out **barrel-aged**: it shimmers, its effects last **1.5× longer** and it **never causes a bad trip**. Hover over herb in the barrel to see how far along it is. Taking it out early resets it; the rest of the stack keeps aging.
 
 ### Pipes
 
@@ -75,7 +72,6 @@ Players within **5 blocks (pipe, 6 for glass)**, **4 blocks (joint)** or **8 blo
 | **Wild Herb Plant** | Spawns naturally in overworld biomes on grass, dirt, podzol, mud, and moss. Break to get magic herb. |
 | **Herb Crop** | 7 growth stages. Plant herb seeds on farmland. Drops magic herb and seeds when fully grown. |
 | **Bong** | Shared smoking station (see Bong). |
-| **Rolling Table** | Bulk joint rolling (see Rolling Table). |
 
 ### Crafting
 
@@ -99,9 +95,7 @@ S
 
 **Bong**: Glass Pane in the top two middle slots, 3 Glass along the bottom
 
-**Rolling Table**: 3 Paper over 3 Planks (any wood)
-
-**Herb Grinder**: Iron Ingot, Iron Nugget, Iron Ingot in a column
+**Herb Grinder**: Aluminum Ingot, Aluminum Nugget, Aluminum Ingot in a column, all from [Tech Reborn](https://modrinth.com/mod/techreborn). Without Tech Reborn installed the grinder can't be crafted (everything else works).
 
 ### Advancements
 Magic Herb → First Hit → Sharing is Caring / Cured / Bad Trip (hidden), and Magic Herb → Green Thumb → Grow Room.
@@ -129,8 +123,7 @@ Wild herb plants spawn across overworld biomes on the surface. They're rare enou
 | `hunger_exhaustion` | 3.0 | Hunger cost per hit. |
 | `indoor_min_block_light` | 12 | Lamp light a crop needs to count as indoor-grown. |
 | `bong_aoe_range` / `bong_capacity` / `bong_cooldown_ticks` | 8.0 / 8 / 40 | Bong sharing radius, how many loads it holds, and each player's wait between hits. |
-| `rolling_table_joints_per_herb` | 3 | Joints per herb + paper at the rolling table. |
-| `aging_ticks` / `aged_duration_multiplier` | 24000 / 1.5 | How long dried herb must stay in a barrel, and the duration bonus once aged. |
+| `aging_ticks` / `aged_duration_multiplier` | 120000 / 1.5 | How long dried herb must stay in a barrel, and the duration bonus once aged. |
 | `indoor_potency_bonus` | 1 | Extra effect levels for indoor-grown herb. |
 
 Other mods and datapacks can make their items smokeable in a pipe by adding them to the `magicherb:smokes` item tag.
@@ -143,6 +136,7 @@ Other mods and datapacks can make their items smokeable in a pipe by adding them
 - Minecraft 26.3
 - Fabric Loader 0.20.1+
 - Fabric API 0.166.0+26.3
+- Optional: [Tech Reborn](https://modrinth.com/mod/techreborn) 6.2.1+ (needed to craft the Herb Grinder)
 
 Drop `magicherb-1.0.0.jar` into your `mods/` folder.
 
@@ -185,7 +179,6 @@ Edit the 16×16 files directly, then rebuild.
   - [ ] `textures/item/ground_herb.png`, `grinder.png` (16×16)
   - [ ] `textures/block/wild_herb_plant.png` (16×16; shown as two crossed planes like tall grass)
   - [ ] `textures/block/herb_crop_stage0.png` … `herb_crop_stage7.png` (16×16; shown in a `#` like wheat, stage 7 = harvestable)
-  - [ ] `textures/block/rolling_table_top.png`, `rolling_table_side.png` (16×16; side is the table front, transparent between the legs)
   - [ ] `textures/block/bong.png` (16×16 sheet the 3D model reads parts from: top-left 3×3 = mouthpiece opening, top-right 3×3 = herb in the bowl, columns 6–9 rows 0–8 = neck, columns 5–10 rows 9–15 = water chamber, columns 11–14 rows 9–13 = bowl and stem. Run `python3 gentextures.py block/bong` and look at `texture_previews/block/bong_grid.png` for the layout)
   - [ ] `textures/mob_effect/blazed.png` (18×18; effect icon)
   - [ ] `icon.png` (128×128; mod icon in mod lists, currently the magic herb scaled up)
@@ -197,9 +190,8 @@ Edit the 16×16 files directly, then rebuild.
 - [x] **Pipe variants** — wood, clay and glass pipes
 - [x] **Indoor growing** — crops grown under artificial light are more potent
 - [x] **Bong block** — placeable block that multiple players can use at once; larger AOE
-- [x] **Rolling table** — station for bulk joint rolling
 - [x] **Herb strains** — classic, energising, sedating and creative, found wild by biome
-- [x] **Aging / curing** — dried herb improves if stored in a barrel for a Minecraft day
+- [x] **Aging / curing** — dried herb improves if stored in a barrel for five Minecraft days
 - [x] **Grinder item** — processes herb for more efficient joint crafting
 
 ### Polish
@@ -227,7 +219,7 @@ The mod is structured as a standard Fabric project:
 ```
 src/
   main/java/net/magicherb/
-    block/          Crops, wild herb, bong, rolling table + registration
+    block/          Crops, wild herb, bong + registration
     effect/         Blazed mob effect
     item/           Pipes, joint, grinder, strains, aging, smoking effects, item registration
     mixin/          Barrel hook for aging

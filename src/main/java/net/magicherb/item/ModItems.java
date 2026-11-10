@@ -52,9 +52,6 @@ public class ModItems {
     public static final Item BONG = register("bong",
         new BlockItem(ModBlocks.BONG, props("bong").useBlockDescriptionPrefix()));
 
-    public static final Item ROLLING_TABLE = register("rolling_table",
-        new BlockItem(ModBlocks.ROLLING_TABLE, props("rolling_table").useBlockDescriptionPrefix()));
-
     private static Item.Properties props(String name) {
         return new Item.Properties().setId(
             ResourceKey.create(Registries.ITEM,
@@ -95,9 +92,6 @@ public class ModItems {
             output.prepend(PIPE);
         });
 
-        CreativeModeTabEvents.modifyOutputEvent(tab("functional_blocks")).register(output -> {
-            output.prepend(ROLLING_TABLE);
-            output.prepend(BONG);
-        });
+        CreativeModeTabEvents.modifyOutputEvent(tab("functional_blocks")).register(output -> output.prepend(BONG));
     }
 }

@@ -28,8 +28,7 @@ public class ModConfig {
     public double bong_aoe_range                 = 8.0;
     public int    bong_capacity                  = 8;
     public int    bong_cooldown_ticks            = 40;
-    public int    rolling_table_joints_per_herb  = 3;
-    public int    aging_ticks                    = 24000;
+    public int    aging_ticks                    = 120000;
     public double aged_duration_multiplier       = 1.5;
 
     public static void load() {
