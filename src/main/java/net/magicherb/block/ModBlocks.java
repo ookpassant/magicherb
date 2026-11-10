@@ -20,7 +20,7 @@ public class ModBlocks {
             .noCollision()
             .instabreak()
             .sound(SoundType.GRASS)
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
             .replaceable()
         )
     );
@@ -28,7 +28,7 @@ public class ModBlocks {
     public static final Block HERB_CROP = register("herb_crop",
         new HerbCropBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT)
             .setId(key("herb_crop"))
-            .pushReaction(PushReaction.DESTROY)
+            .pushReaction(PushReaction.POPPED)
         )
     );
 

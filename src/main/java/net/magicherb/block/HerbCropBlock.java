@@ -1,6 +1,5 @@
 package net.magicherb.block;
 
-import com.mojang.serialization.MapCodec;
 import net.magicherb.ModAdvancements;
 import net.magicherb.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -16,16 +15,10 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class HerbCropBlock extends CropBlock {
 
-    public static final MapCodec<HerbCropBlock> CODEC = simpleCodec(HerbCropBlock::new);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
 
     public HerbCropBlock(Properties settings) {
         super(settings);
-    }
-
-    @Override
-    public MapCodec<HerbCropBlock> codec() {
-        return CODEC;
     }
 
     @Override
